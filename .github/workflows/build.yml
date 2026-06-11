@@ -23,11 +23,6 @@ jobs:
       - name: Generate Xcode Project
         run: xcodegen generate
 
-      - name: Install Pillow & Generate Icons
-        run: |
-          pip3 install --break-system-packages Pillow 2>/dev/null || true
-          python3 Scripts/generate_icons.py || true
-
       - name: Build Archive
         run: |
           xcodebuild archive \
