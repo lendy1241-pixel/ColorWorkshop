@@ -17,7 +17,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 withAnimation(.easeInOut(duration: 0.6)) {
                     showSplash = false
                 }
@@ -126,16 +126,13 @@ struct ContentView: View {
     }
 }
 
-// MARK: - 启动画面 Logo 动画
+// MARK: - 启动画面 Logo (静态高性能)
 struct SplashLogoView: View {
-    @State private var rotation: Double = 0
-    @State private var scale: CGFloat = 0.8
-
     var body: some View {
         ZStack {
-            // 外圈旋转色环
+            // 六个色点
             ForEach(0..<6) { i in
-                let angle = Double(i) * 60.0 + rotation
+                let angle = Double(i) * 60.0
                 let hue = Double(i) / 6.0
                 Circle()
                     .fill(Color(hue: hue, saturation: 0.85, brightness: 0.9))
@@ -159,15 +156,6 @@ struct SplashLogoView: View {
                         .font(.system(size: 18))
                         .foregroundColor(.white)
                 )
-        }
-        .scaleEffect(scale)
-        .onAppear {
-            withAnimation(.linear(duration: 8).repeatForever(autoreverses: false)) {
-                rotation = 360
-            }
-            withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
-                scale = 1.0
-            }
         }
     }
 }

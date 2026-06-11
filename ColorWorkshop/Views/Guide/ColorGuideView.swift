@@ -251,29 +251,41 @@ struct ColorGuideView: View {
     }
 
     private var colorWheelView: some View {
-        ZStack {
-            // 色环
-            ForEach(0..<360, id: \.self) { degree in
-                let hue = Double(degree) / 360.0
-                let angle = Double(degree) * .pi / 180 - .pi / 2
+        Canvas { context, size in
+            let cx = size.width / 2
+            let cy = size.height / 2
+            let outerR = min(cx, cy) - 4
+            let innerR = outerR - 28
+
+            // 绘制 360 度色环 (一次性离屏渲染)
+            for deg in 0..<360 {
+                let hue = Double(deg) / 360.0
+                let rad = Double(deg) * .pi / 180 - .pi / 2
                 let color = Color(hue: hue, saturation: 0.85, brightness: 0.9)
 
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 2, height: 30)
-                    .offset(x: cos(angle) * 90)
-                    .rotationEffect(.degrees(Double(degree)))
+                var path = Path()
+                let x1 = cx + innerR * cos(rad)
+                let y1 = cy + innerR * sin(rad)
+                let x2 = cx + outerR * cos(rad)
+                let y2 = cy + outerR * sin(rad)
+                path.move(to: CGPoint(x: x1, y: y1))
+                path.addLine(to: CGPoint(x: x2, y: y2))
+
+                context.stroke(path, with: .color(color), lineWidth: 2.5)
             }
 
             // 内圈
-            Circle()
-                .fill(.ultraThinMaterial)
-                .frame(width: 130, height: 130)
+            let centerRect = CGRect(x: cx - 58, y: cy - 58, width: 116, height: 116)
+            context.fill(Path(ellipseIn: centerRect), with: .color(.white.opacity(0.15)))
+            context.stroke(Path(ellipseIn: centerRect), with: .color(.white.opacity(0.3)), lineWidth: 1)
 
-            Text("色轮")
-                .font(.caption)
-                .foregroundColor(.secondary)
+            // 文字
+            context.draw(
+                Text("色轮").font(.caption).foregroundColor(.secondary),
+                at: CGPoint(x: cx, y: cy)
+            )
         }
+        .drawingGroup()
     }
 
     private func harmonyInfoCard(_ type: HarmonyType) -> some View {
