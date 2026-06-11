@@ -36,13 +36,23 @@ jobs:
             DEVELOPMENT_TEAM="" \
             -destination 'generic/platform=iOS'
 
-      - name: Export IPA
+      - name: Install Pillow
+        run: pip3 install --break-system-packages Pillow 2>/dev/null || true
+
+      - name: Export IPA & Inject Icons
         run: |
+          APP="build/ColorWorkshop.xcarchive/Products/Applications/ColorWorkshop.app"
           mkdir -p build/Payload
-          cp -R build/ColorWorkshop.xcarchive/Products/Applications/ColorWorkshop.app build/Payload/
-          cd build
-          zip -r 调色工坊.ipa Payload
-          cd ..
+
+          # Run icon fix script (flatten alpha -> copy to bundle)
+          python3 Scripts/inject_icons.py "${APP}"
+
+          # Ensure CFBundleIconFiles in compiled plist
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIconFiles array" "${APP}/Info.plist" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :CFBundleIconFiles:0 string AppIcon60x60@2x" "${APP}/Info.plist" 2>/dev/null || true
+
+          cp -R "${APP}" build/Payload/
+          cd build && zip -r 调色工坊.ipa Payload && cd ..
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4

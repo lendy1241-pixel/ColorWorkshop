@@ -45,14 +45,20 @@
 	<string>UIStatusBarStyleDefault</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Automatic</string>
-	<key>CFBundleIconName</key>
-	<string>AppIcon</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>AppIcon60x60@2x</string>
+		<string>AppIcon60x60@3x</string>
+	</array>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
-			<key>CFBundleIconName</key>
-			<string>AppIcon</string>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon60x60@2x</string>
+				<string>AppIcon60x60@3x</string>
+			</array>
 		</dict>
 	</dict>
 	<key>MinimumOSVersion</key>
