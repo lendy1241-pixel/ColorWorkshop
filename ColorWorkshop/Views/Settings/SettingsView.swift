@@ -92,7 +92,9 @@ struct SettingsView: View {
             }
         }
         .background(GradientBackground())
-        .scrollContentBackground(.hidden)
+        .onAppear {
+            UITableView.appearance().backgroundColor = .clear
+        }
         .navigationTitle("设置")
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $showAbout) {

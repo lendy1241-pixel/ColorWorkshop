@@ -67,11 +67,16 @@ final class PaletteViewModel: ObservableObject {
     }
 
     func duplicatePalette(_ palette: ColorPalette) {
-        var copy = palette
-        copy.id = UUID()
-        copy.name = palette.name + " (副本)"
-        copy.createdAt = Date()
-        copy.modifiedAt = Date()
+        let copy = ColorPalette(
+            id: UUID(),
+            name: palette.name + " (副本)",
+            description: palette.description,
+            colors: palette.colors,
+            createdAt: Date(),
+            modifiedAt: Date(),
+            isFavorite: false,
+            harmony: palette.harmony
+        )
         palettes.insert(copy, at: 0)
         savePalettes()
     }
