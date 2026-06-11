@@ -63,7 +63,6 @@ struct MixLabView: View {
                     viewModel.setBaseColor(for: activeEditingSlot, color: color)
                 }
             )
-            .presentationDetents([.medium, .large])
         }
         .alert("已保存", isPresented: $showSaveAlert) {
             Button("好的", role: .cancel) {}

@@ -233,9 +233,9 @@ struct ColorLesson: Identifiable {
             """,
             iconName: "slider.horizontal.3",
             exampleColors: [
-                Color(red: 0.1, g: 0.2, b: 0.7),
-                Color(red: 0.4, g: 0.5, b: 0.85),
-                Color(red: 0.7, g: 0.75, b: 0.92),
+                Color(red: 0.1, green: 0.2, blue: 0.7),
+                Color(red: 0.4, green: 0.5, blue: 0.85),
+                Color(red: 0.7, green: 0.75, blue: 0.92),
             ]
         ),
         ColorLesson(
@@ -254,9 +254,9 @@ struct ColorLesson: Identifiable {
             """,
             iconName: "circle.lefthalf.filled",
             exampleColors: [
-                Color(red: 0.45, g: 0.42, b: 0.38),
-                Color(red: 0.55, g: 0.58, b: 0.60),
-                Color(red: 0.40, g: 0.35, b: 0.45),
+                Color(red: 0.45, green: 0.42, blue: 0.38),
+                Color(red: 0.55, green: 0.58, blue: 0.60),
+                Color(red: 0.40, green: 0.35, blue: 0.45),
             ]
         ),
         ColorLesson(
@@ -277,9 +277,9 @@ struct ColorLesson: Identifiable {
             """,
             iconName: "face.smiling",
             exampleColors: [
-                Color(red: 0.94, g: 0.78, b: 0.68),
-                Color(red: 0.85, g: 0.62, b: 0.50),
-                Color(red: 0.70, g: 0.45, b: 0.35),
+                Color(red: 0.94, green: 0.78, blue: 0.68),
+                Color(red: 0.85, green: 0.62, blue: 0.50),
+                Color(red: 0.70, green: 0.45, blue: 0.35),
             ]
         ),
     ]

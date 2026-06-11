@@ -57,7 +57,7 @@ struct NoiseTexture: View {
     }
 }
 
-// MARK: - 动画渐变背景
+// MARK: - 动画渐变背景 (iOS 15+ 兼容)
 struct AnimatedGradientBackground: View {
     @State private var animate = false
 
@@ -72,22 +72,13 @@ struct AnimatedGradientBackground: View {
     }
 
     var body: some View {
-        MeshGradient(
-            width: 3,
-            height: 3,
-            points: animate ? [
-                [0.0, 0.0], [0.5, 0.0], [1.0, 0.0],
-                [0.0, 0.5], [0.5, 0.5], [1.0, 0.5],
-                [0.0, 1.0], [0.5, 1.0], [1.0, 1.0],
-            ] : [
-                [0.0, 0.0], [0.3, 0.1], [1.0, 0.0],
-                [0.1, 0.4], [0.7, 0.6], [0.9, 0.3],
-                [0.0, 1.0], [0.4, 0.9], [1.0, 1.0],
-            ],
-            colors: colors.map { $0 }
+        LinearGradient(
+            colors: colors,
+            startPoint: animate ? .topLeading : .bottomTrailing,
+            endPoint: animate ? .bottomTrailing : .topLeading
         )
         .onAppear {
-            withAnimation(.easeInOut(duration: 8).repeatForever(autoreverses: true)) {
+            withAnimation(.easeInOut(duration: 4).repeatForever(autoreverses: true)) {
                 animate = true
             }
         }
