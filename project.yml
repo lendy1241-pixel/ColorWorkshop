@@ -1,0 +1,43 @@
+name: ColorWorkshop
+options:
+  bundleIdPrefix: com.colorworkshop
+  deploymentTarget:
+    iOS: "15.0"
+  xcodeVersion: "14.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.7"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    INFOPLIST_FILE: ColorWorkshop/Info.plist
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGNING_ALLOWED: "NO"
+
+targets:
+  ColorWorkshop:
+    type: application
+    platform: iOS
+    sources:
+      - path: ColorWorkshop
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.colorworkshop.app
+        DISPLAY_NAME: "调色工坊"
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGNING_ALLOWED: "NO"
+    preBuildScripts:
+      - name: "Generate App Icon"
+        script: |
+          python3 "${PROJECT_DIR}/Scripts/generate_icons.py"
+        basedOnDependencyAnalysis: false

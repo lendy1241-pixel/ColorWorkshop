@@ -1,0 +1,32 @@
+# Xcode
+build/
+*.xcworkspace
+*.xcuserdata
+DerivedData/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcarchive
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/
+
+# SwiftPM
+.build/
+Packages/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
